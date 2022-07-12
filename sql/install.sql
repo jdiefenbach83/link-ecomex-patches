@@ -15,11 +15,11 @@ SET TRIMSPOOL ON
 SET VERIFY OFF
 
 REM +=============================================================+
-REM | ATENÇÃO! Atualize o nome dos patches que são pré-requisitos  |
-REM | entre virgula e sem espaçoos aqui:                           |
+REM | ATENÇÃO! Atualize o nome dos patches que são pré-requisitos |
+REM | entre virgula e sem espaços aqui:                           |
 REM | exemplo: DEFINE PATCHES_PRE_REQ=p108a,p108b,p108x            |
 REM +=============================================================+
-DEFINE PATCHES_PRE_REQ=p108ae,p108ak,p108ap,p108ar,p108au,p108ay,p108bk,p108bq,p108cb,p108cn
+DEFINE PATCHES_PRE_REQ=p108bb,p108bi,p108bl,p108by,p108cc,p108cg,p108ch,p108cm,p108cp,p108cr,p108cs,p108ct,p108cw,p108cy,p108cz
 REM +=============================================================+
 
 REM +=============================================================+
@@ -35,6 +35,7 @@ PROMPT Generating the log file. The script will abort if this step fails.
 PROMPT ==================================================================
 
 SPOOL cmx_patch.sql.tmp
+
 
 SELECT 'PROMPT This patch cannot be installed on this system, because the pre-requirement to ' || chr (10) ||
        'PROMPT install it is the patch p'||'&RELEASE_NUMBER' ||'.'|| chr (10) ||
@@ -59,6 +60,15 @@ SELECT 'PROMPT This patch cannot be installed on this system, because the pre-re
   FROM dual
   WHERE cmx_fnc_patches_faltantes('&PATCHES_PRE_REQ') IS NOT NULL;
 
+SELECT 'PROMPT Creating synonym for imp_fnc_cond_prev_cust_sap ' || chr (10) ||
+       'CREATE SYNONYM imp_fnc_cond_prev_cust FOR imp_fnc_cond_prev_cust_sap;'
+  FROM dual
+ WHERE EXISTS (SELECT NULL
+                     FROM user_objects
+                    WHERE Upper(object_name) = 'IMP_FNC_COND_PREV_CUST_SAP');
+
+
+
 SPOOL OFF
 
 SET FEEDBACK ON
@@ -72,7 +82,7 @@ SET ECHO ON
 REM +=========================================+
 REM | ATENÇÃO! Atualize o nome do patch aqui: |
 REM +=========================================+
-DEFINE PATCH=p108dc
+DEFINE PATCH=p108dd
 REM +=========================================+
 
 REM +==========================================================+
@@ -142,7 +152,9 @@ SELECT object_type, object_name, to_char(last_ddl_time,'yyyy/mm/dd hh24:mi:ss') 
 
 SET ECHO ON
 
-@@script_ecomex_092.sql
+@@script_ecomex.sql
+
+
 
 SET ECHO OFF
 SET FEEDBACK OFF

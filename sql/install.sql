@@ -19,7 +19,7 @@ REM | ATENÇÃO! Atualize o nome dos patches que são pré-requisitos  |
 REM | entre virgula e sem espaçoos aqui:                           |
 REM | exemplo: DEFINE PATCHES_PRE_REQ=p108a,p108b,p108x            |
 REM +=============================================================+
-DEFINE PATCHES_PRE_REQ=p108v,p108ae,p108ak,p108ap,p108ar,p108au,p108ay,p108bk,p108bq,p108cb,p108cc,p108cn,p108co,p108cw
+DEFINE PATCHES_PRE_REQ=p108ae,p108ak,p108ap,p108ar,p108au,p108ay,p108bk,p108bq,p108cb,p108cn
 REM +=============================================================+
 
 REM +=============================================================+
@@ -72,7 +72,7 @@ SET ECHO ON
 REM +=========================================+
 REM | ATENÇÃO! Atualize o nome do patch aqui: |
 REM +=========================================+
-DEFINE PATCH=p108db
+DEFINE PATCH=p108dc
 REM +=========================================+
 
 REM +==========================================================+
@@ -142,7 +142,7 @@ SELECT object_type, object_name, to_char(last_ddl_time,'yyyy/mm/dd hh24:mi:ss') 
 
 SET ECHO ON
 
-@@script_ecomex_095.sql
+@@script_ecomex_092.sql
 
 SET ECHO OFF
 SET FEEDBACK OFF
